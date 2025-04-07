@@ -7,15 +7,17 @@ import org.example.util.TopLeaguesExtractor;
 import java.io.IOException;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class AsyncDataProcessor {
     private static final ExecutorService executor = Executors.newFixedThreadPool(3);
 
-    public void startScraping() {
+    public void startScraping() throws ExecutionException, InterruptedException {
         CompletableFuture<Void> future = fetchDataAsync();
-        future.join();
+        future.get();
+        executor.shutdown();
     }
 
     private CompletableFuture<Void> fetchDataAsync() {
