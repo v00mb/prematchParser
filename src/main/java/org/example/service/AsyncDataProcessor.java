@@ -1,6 +1,5 @@
 package org.example.service;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.http.HttpSports;
 import org.example.util.TopLeaguesExtractor;

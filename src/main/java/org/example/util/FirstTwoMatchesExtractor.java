@@ -15,7 +15,6 @@ public class FirstTwoMatchesExtractor {
 
     public static void extractFirstTwoMatches(HttpResponse<String> response) {
         ObjectMapper mapper = new ObjectMapper();
-        List<String> ids = new ArrayList<>();
         try {
             JsonNode root = mapper.readTree(response.body());
             JsonNode dataArray = root.get("data");
@@ -25,7 +24,6 @@ public class FirstTwoMatchesExtractor {
                     JsonNode match = dataArray.get(i);
                     String id = match.get("id").asText();
                     String name = match.get("name").asText();
-                    ids.add(id);
                     System.out.println("\t" + name + ", " + getDateAndTimeFromKickOff(match.get("kickoff").asLong()) + ", " + id);
                     new HttpMarkets().getAllMarkets(id);
                     System.out.println();
