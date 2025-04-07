@@ -14,15 +14,11 @@ public class AsyncDataProcessor {
     private static final ExecutorService executor = Executors.newFixedThreadPool(3);
 
     public void startScraping() {
-        try {
-            CompletableFuture<Void> future = fetchDataAsync();
-            future.join();
-        } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        CompletableFuture<Void> future = fetchDataAsync();
+        future.join();
     }
 
-    private CompletableFuture<Void> fetchDataAsync() throws IOException, InterruptedException {
+    private CompletableFuture<Void> fetchDataAsync() {
 
         return CompletableFuture.supplyAsync(() -> {
             try {
